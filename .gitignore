@@ -1,0 +1,42 @@
+﻿# --- Python ---
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+pip-wheel-metadata/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+profile_default/
+
+# --- R (optional) ---
+.Rhistory
+.RData
+.Rproj.user/
+renv/library/
+
+# --- Editors/OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Data & artifacts (ignored by default) ---
+data/
+outputs/
+reports/
+models/
+logs/
+
+# --- BUT keep small tracked examples/samples ---
+!data/samples/
+!data/samples/**
+!outputs/samples/
+!outputs/samples/**
+
+# --- Secrets ---
+.env
+*.env
+**/secrets/*.*
