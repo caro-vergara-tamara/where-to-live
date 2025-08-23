@@ -275,7 +275,7 @@ def backfill_geo_from_cd_stat_sector(
     return full_df, diagnostics
 
     
-def fill_hierarchy_by_type(df, target_col, type_col='cd_type',
+def fill_hierarchy_by_type_year(df, target_col, type_col='cd_type',
                            levels=('cd_sub_munty','cd_munty_refnis','cd_dstr_refnis','cd_prov_refnis'),
                            agg='mean'):
     """
@@ -288,13 +288,15 @@ def fill_hierarchy_by_type(df, target_col, type_col='cd_type',
 
     for level in levels:
         # compute stat on the ORIGINAL df to avoid leakage from previous fills
-        group_stat = df.groupby([level, type_col])[target_col].transform(agg)
+        group_stat = df.groupby([level, type_col, "cd_year"])[target_col].transform(agg)
 
         # fill only where still missing in the working copy
         mask = df_copy[target_col].isna()
         df_copy.loc[mask, target_col] = group_stat[mask]
 
     return df_copy
+
+
 
 # Now expanding the data from aglomerated to units
 
